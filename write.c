@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
-#<sys/types.h>
+#include <sys/types.h>
 
 int main()
 {
