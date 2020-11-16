@@ -5,7 +5,7 @@ struct dll {
     int data;
     struct dll *prev;
     struct dll *next;
-}
+};
 
 typedef struct dll node;
 
@@ -109,7 +109,7 @@ void displayLR()
     temp = head;
     while(temp != NULL)
     {
-        printf("%d", temp->data);
+        printf("%d ", temp->data);
         temp = temp->next;
     }
 }
@@ -121,10 +121,10 @@ void displayRL()
         temp = temp->next;
     while(temp->prev != NULL)
     {
-        printf("%d", temp->data);
+        printf("%d ", temp->data);
         temp = temp->prev;
     }
-    printf("%d", temp->data);
+    printf("%d ", temp->data);
 }
 
 int main()
@@ -155,13 +155,13 @@ int main()
                     break;
             case 8: displayLR();
                     break;
-            case 9: DisplayRL();
+            case 9: displayRL();
                     break;
             case 10: printf("\nEXIT");
                     break;
             default: printf("\nEnter a valid choice(1-10)");
         }
-    } while(choice != 10)
+    } while(choice != 10);
 
     return 0;
 }
