@@ -103,7 +103,7 @@ void main()
                 else
                 {
                     printf("Preorder Traversal:");
-                    Preorder(root);
+                    preorder(root);
                 }
                 break;
                 
