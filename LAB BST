@@ -1,0 +1,139 @@
+//PM ARSHIYA ZEBZA
+//USN - 1NH19CS732
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct BinaryTree
+{
+    struct BinaryTree *left;
+    int data;
+    struct BinaryTree *right;
+};
+
+typedef struct BinaryTree node;
+
+node *root=NULL, *new, *temp;
+
+//creating the tree
+node* insert(node* root, int item)
+{
+    if(root == NULL)
+    {
+        new = (node *)malloc(sizeof(node));
+        new->data=item;
+        new->left=new->right=NULL;
+        root=new;
+    }
+    
+    else if(item<root->data)
+    {
+        root->left=insert(root->left,item);
+    }
+    
+    else if(item>root->data)
+    {
+        root->right=insert(root->right,item);
+    }
+    return root;
+}
+
+node* minValueNode(node* root)
+{
+    temp = root;
+    while(temp!=NULL && temp->left != NULL)
+        temp = temp->left;
+    return temp;    
+}
+
+node* delete(node *root, int key)
+{
+    if(root == NULL)
+        return root;
+    
+    if(key < root->data)
+        root->left = delete(root->left, key);
+    else if(key > root->data)
+        root->right = delete(root->right, key);
+    else
+    {
+        if((root->left == NULL) && (root->right == NULL))
+        {
+            free(root);
+            root = NULL;
+            return root;
+        }
+        else if(root->left == NULL)
+        {
+            temp=root->right;
+            free(root);
+            return temp;
+        }
+        else if(root->right == NULL)
+        {
+            temp=root->left;
+            free(root);
+            return temp;
+        }
+        
+        temp=minValueNode(root->right);
+        
+        root->data=temp->data;
+        
+        root->right=delete(root->right, temp->data);
+    }
+}
+
+//Inorder
+void inorder(node *root)
+{
+    if(root)
+    {
+        inorder(root->left);
+        printf("%d\t", root->data);
+        inorder(root->right);
+    }
+}
+
+//Main function
+void main()
+{
+    int choice, item;
+    do{
+        printf("\n1.Insert\n2.Delete\n3..Inorder_Traversal\n4.Exit");
+        printf("\nEnter the choice: ");
+        scanf("%d", &choice);
+        switch(choice)
+        {
+            case 1:
+                printf("Enter the element to be inserted\n");
+                scanf("%d", &item);
+                root=insert(root,item);
+                break;
+                
+                
+            case 2:    
+                printf("Enter the element to be deleted\n");
+                scanf("%d", &item);
+                root=delete(root,item);
+                break;
+                
+            case 3:
+                if(root == NULL)
+                    printf("Tree is empty\n");
+                else
+                {
+                    printf("Inorder Traversal:");
+                    inorder(root);
+                }
+                break;
+                
+            case 4:
+                printf("\nEXIT");
+                break;
+                
+            default:
+                printf("Enter a valid choice(1-4)");
+        }
+    }while(choice != 4);
+}
