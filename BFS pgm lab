@@ -1,0 +1,52 @@
+//PM ARSHIYA ZEBA
+//USN- 1NH19CS732
+
+#include <stdio.h>
+int A[10][10], visited[10], queue[10], f=-1, r=-1, n;
+char alphabets[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
+
+void BFS(int v)
+{
+    int u;
+    f=0;
+    queue[++r]=v;
+    visited[v]=1;
+    printf("%c->", alphabets[v]);
+    while(f<=r)
+    {
+        v=queue[f++];
+        for(u=0;u<n;u++)
+        {
+            if((visited[u]==0)&&(A[v][u]==1))
+            {
+               printf("%c->", alphabets[u]);
+                queue[++r]=u;
+                visited[u]=1;
+            }
+        }
+    }
+}
+
+void main()
+{
+    int i,j,source;
+    printf("Enter number of vertices:");
+    scanf("%d", &n);
+    printf("\nEnter adjacecy matrix of the graph:");
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<n;j++)
+        {
+            scanf("%d", &A[i][j]);
+        }
+    }
+    
+    for(i=0;i<n;i++)
+    {
+        visited[i] = 0;
+    }
+    
+    printf("Enter the source vertex:");
+    scanf("%d", &source);
+    BFS(source);
+}
